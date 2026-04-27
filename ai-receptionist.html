@@ -78,16 +78,70 @@
   .widget-label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--green); margin-bottom: 16px; }
   .widget-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.6rem; color: var(--white); margin-bottom: 10px; letter-spacing: -0.02em; }
   .widget-desc { font-size: 0.9rem; color: var(--muted); margin-bottom: 40px; line-height: 1.65; }
-  .widget-placeholder {
-    background: var(--surface); border: 2px dashed rgba(0,232,150,0.2);
-    border-radius: 16px; padding: 64px 32px; margin-bottom: 24px;
-    display: flex; flex-direction: column; align-items: center; gap: 14px;
+
+  /* ── MARTIAN COMING SOON ── */
+  .martian-teaser {
+    position: relative; z-index: 1; margin-bottom: 24px;
+    background: linear-gradient(135deg, #080f1a 0%, #0a1520 60%, #060c15 100%);
+    border: 1px solid rgba(0,232,150,0.18);
+    border-radius: 20px; padding: 56px 32px;
+    overflow: hidden;
+    text-align: center;
   }
-  .widget-icon { font-size: 2.5rem; }
-  .widget-placeholder-text { font-family: 'Syne', sans-serif; font-weight: 700; color: var(--white); font-size: 1rem; }
-  .widget-placeholder-sub { font-size: 0.84rem; color: var(--muted); }
-  /* ACTUAL WIDGET SLOT — ElevenLabs widget goes here */
-  .widget-embed { min-height: 200px; display: flex; align-items: center; justify-content: center; position: relative; z-index: 1; }
+  .martian-teaser::before {
+    content: ''; position: absolute; inset: 0;
+    background-image:
+      radial-gradient(circle at 50% 50%, rgba(0,232,150,0.07) 0%, transparent 65%),
+      repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(0,232,150,0.04) 40px),
+      repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(0,232,150,0.04) 40px);
+    pointer-events: none;
+  }
+
+  /* big name */
+  .martian-name {
+    position: relative; z-index: 1;
+    font-family: 'Syne', sans-serif; font-weight: 800;
+    font-size: clamp(3rem, 9vw, 5.5rem);
+    letter-spacing: -0.045em; line-height: 1;
+    color: transparent;
+    background: linear-gradient(140deg, #ffffff 0%, #a8f5da 35%, #00E896 68%, #00b870 100%);
+    -webkit-background-clip: text; background-clip: text;
+    filter: drop-shadow(0 0 48px rgba(0,232,150,0.38));
+    margin-bottom: 10px;
+  }
+  .martian-tagline {
+    position: relative; z-index: 1;
+    font-size: 0.78rem; letter-spacing: 0.26em; text-transform: uppercase;
+    color: var(--muted); font-weight: 500; margin-bottom: 32px;
+  }
+
+  /* decorative divider */
+  .teaser-divider {
+    position: relative; z-index: 1;
+    display: flex; align-items: center; justify-content: center; gap: 14px;
+    margin: 6px 0 20px;
+  }
+  .teaser-divider-line { width: 60px; height: 1px; background: linear-gradient(90deg, transparent, rgba(0,232,150,0.35)); }
+  .teaser-divider-line.r { background: linear-gradient(90deg, rgba(0,232,150,0.35), transparent); }
+  .teaser-divider-diamond {
+    width: 6px; height: 6px; background: var(--green); transform: rotate(45deg);
+    box-shadow: 0 0 8px rgba(0,232,150,0.7);
+  }
+
+  /* launch pill */
+  .launch-badge {
+    position: relative; z-index: 1;
+    display: inline-flex; align-items: center; gap: 12px;
+    background: rgba(0,232,150,0.07); border: 1px solid rgba(0,232,150,0.28);
+    border-radius: 100px; padding: 11px 24px;
+    font-size: 0.9rem; font-weight: 600; color: var(--white);
+  }
+  .launch-badge .pill-dot {
+    width: 9px; height: 9px; border-radius: 50%; background: var(--green);
+    box-shadow: 0 0 10px rgba(0,232,150,0.9); animation: pulse 1.8s ease-in-out infinite; flex-shrink: 0;
+  }
+  .launch-badge .date { color: var(--green); font-weight: 700; }
+
   .widget-disclaimer { font-size: 0.78rem; color: var(--muted); position: relative; z-index: 1; }
 
   /* BENEFITS */
@@ -126,6 +180,7 @@
     nav ul { display: none; }
     .benefits-grid { grid-template-columns: 1fr; }
     .widget-container { padding: 36px 24px; }
+    .martian-teaser { padding: 40px 20px; }
     footer { flex-direction: column; align-items: flex-start; }
   }
 </style>
@@ -154,10 +209,10 @@
   <div class="orb orb-1"></div>
   <div class="orb orb-2"></div>
   <div class="hero-inner">
-    <div class="hero-badge">Live Demo — No Signup Required</div>
-    <h1 class="hero-title">Try Our AI Receptionist <span>Live</span></h1>
-    <p class="hero-sub">See how your business can capture clients and answer questions 24/7 — without lifting a finger.</p>
-    <p class="hero-note">Just start talking. Martian is ready.</p>
+    <div class="hero-badge">Launching April 30, 2025</div>
+    <h1 class="hero-title">Meet <span>Martian</span></h1>
+    <p class="hero-sub">Your AI receptionist that captures clients and answers questions 24/7 — without lifting a finger.</p>
+    <p class="hero-note">Something exciting is almost here.</p>
   </div>
 </div>
 
@@ -165,13 +220,28 @@
 <div class="widget-section">
   <div class="widget-container reveal">
     <div class="widget-label">Meet Martian</div>
-    <div class="widget-title">Your AI Receptionist is Live</div>
-    <div class="widget-desc">Talk to Martian below. Ask it about services, pricing, or anything else — just like a real customer would.</div>
-    <!-- AI RECEPTIONIST WIDGET -->
-    <div class="widget-embed">
-      <elevenlabs-convai agent-id="agent_2801kp120w8rf7684y222sf86mx5"></elevenlabs-convai>
+    <div class="widget-title">Your AI Receptionist</div>
+    <div class="widget-desc">Trained on your services, pricing, and FAQs — sounds exactly like your business, available every hour of the day.</div>
+
+    <!-- MARTIAN COMING SOON TEASER -->
+    <div class="martian-teaser">
+      <div class="martian-name">MARTIAN</div>
+
+      <div class="teaser-divider">
+        <div class="teaser-divider-line"></div>
+        <div class="teaser-divider-diamond"></div>
+        <div class="teaser-divider-line r"></div>
+      </div>
+
+      <div class="martian-tagline">AI Receptionist &nbsp;·&nbsp; By Aimplify</div>
+
+      <div class="launch-badge">
+        <div class="pill-dot"></div>
+        <span>Launching&nbsp;<span class="date">April 30, 2025</span></span>
+      </div>
     </div>
-    <p class="widget-disclaimer">This demo uses a general AI. Your business version will be trained specifically on your services, pricing, and FAQs.</p>
+
+    <p class="widget-disclaimer">Your business version will be trained specifically on your services, pricing, and FAQs — and available from day one.</p>
   </div>
 </div>
 
@@ -218,8 +288,8 @@
   <p>© 2025 Aimplify · Potomac, MD</p>
 </footer>
 
-<script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async></script>
 <script>
+  // Scroll reveals
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
