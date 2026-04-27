@@ -67,10 +67,92 @@
   .btn-secondary:hover { border-color: rgba(0,232,150,0.4); color: var(--green); background: rgba(0,232,150,0.04); }
 
   .hero-stats { display: flex; gap: 48px; margin-top: 56px; padding-top: 36px; border-top: 1px solid var(--border); animation: fadeUp 0.7s 0.32s ease both; flex-wrap: wrap; }
-  .stat { }
   .stat-num { font-family: 'Syne', sans-serif; font-size: 2.2rem; font-weight: 800; color: var(--white); line-height: 1; letter-spacing: -0.03em; }
   .stat-num span { color: var(--green); }
   .stat-label { font-size: 0.8rem; color: var(--muted); margin-top: 5px; font-weight: 400; }
+
+  /* ============================================================
+     MARTIAN TEASER POSTER — remove this entire block after launch
+     ============================================================ */
+  .martian-poster-section {
+    padding: 0 5% 72px; position: relative; z-index: 1;
+  }
+  .martian-poster {
+    max-width: 1100px; margin: 0 auto;
+    background: linear-gradient(135deg, #080f1a 0%, #0a1520 60%, #060c15 100%);
+    border: 1px solid rgba(0,232,150,0.18);
+    border-radius: 24px; overflow: hidden; position: relative;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 52px 60px; gap: 40px;
+    box-shadow: 0 0 80px rgba(0,232,150,0.05), 0 32px 80px rgba(0,0,0,0.35);
+  }
+  /* grid bg */
+  .martian-poster::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background-image:
+      radial-gradient(circle at 70% 50%, rgba(0,232,150,0.07) 0%, transparent 60%),
+      repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(0,232,150,0.04) 40px),
+      repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(0,232,150,0.04) 40px);
+  }
+  /* top shimmer line */
+  .martian-poster::after {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0,232,150,0.5), transparent);
+  }
+  .poster-left { position: relative; z-index: 1; flex: 1; }
+  .poster-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 0.7rem; letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--green); font-weight: 600; margin-bottom: 18px;
+  }
+  .poster-eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--green);
+    box-shadow: 0 0 8px rgba(0,232,150,0.9); animation: pulse 2s ease-in-out infinite;
+  }
+  .poster-name {
+    font-family: 'Syne', sans-serif; font-weight: 800;
+    font-size: clamp(2.8rem, 5vw, 4.4rem);
+    letter-spacing: -0.045em; line-height: 1;
+    color: transparent;
+    background: linear-gradient(140deg, #ffffff 0%, #a8f5da 35%, #00E896 68%, #00b870 100%);
+    -webkit-background-clip: text; background-clip: text;
+    filter: drop-shadow(0 0 40px rgba(0,232,150,0.4));
+    margin-bottom: 10px; display: block;
+  }
+  .poster-divider {
+    display: flex; align-items: center; gap: 12px; margin: 14px 0 18px;
+  }
+  .poster-divider-line { width: 48px; height: 1px; background: linear-gradient(90deg, rgba(0,232,150,0.4), transparent); }
+  .poster-divider-diamond { width: 5px; height: 5px; background: var(--green); transform: rotate(45deg); box-shadow: 0 0 6px rgba(0,232,150,0.8); }
+  .poster-tagline {
+    font-size: 0.78rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--muted); font-weight: 500;
+  }
+  .poster-right { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: flex-end; gap: 16px; flex-shrink: 0; }
+  .poster-date {
+    font-family: 'Syne', sans-serif; font-weight: 700;
+    font-size: 0.88rem; color: var(--white); letter-spacing: 0.06em;
+    text-align: right;
+  }
+  .poster-date span { color: var(--green); }
+  .poster-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--green); color: var(--bg);
+    padding: 13px 28px; border-radius: 10px;
+    font-weight: 700; font-size: 0.88rem; text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 24px rgba(0,232,150,0.3);
+    white-space: nowrap;
+  }
+  .poster-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 36px rgba(0,232,150,0.45); }
+  @media (max-width: 680px) {
+    .martian-poster { flex-direction: column; padding: 36px 28px; text-align: center; }
+    .poster-right { align-items: center; }
+    .poster-divider { justify-content: center; }
+  }
+  /* ============================================================
+     END MARTIAN TEASER POSTER
+     ============================================================ */
 
   /* SECTIONS */
   section { padding: 96px 5%; position: relative; z-index: 1; }
@@ -129,14 +211,8 @@
   .price-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 36px 32px; transition: border-color 0.3s; position: relative; }
   .price-card:hover { border-color: rgba(0,232,150,0.2); }
   .price-card.featured { background: var(--green); border-color: var(--green); }
-  .price-card.featured .price-label,
-  .price-card.featured .price-name,
-  .price-card.featured .price-range,
-  .price-card.featured .price-period,
-  .price-card.featured .price-desc,
-  .price-card.featured .price-feature { color: rgba(6,9,15,0.75) !important; }
-  .price-card.featured .price-name,
-  .price-card.featured .price-range { color: var(--bg) !important; }
+  .price-card.featured .price-label, .price-card.featured .price-name, .price-card.featured .price-range, .price-card.featured .price-period, .price-card.featured .price-desc, .price-card.featured .price-feature { color: rgba(6,9,15,0.75) !important; }
+  .price-card.featured .price-name, .price-card.featured .price-range { color: var(--bg) !important; }
   .price-card.featured .price-divider { background: rgba(0,0,0,0.12) !important; }
   .price-card.featured .price-feature::before { color: var(--bg) !important; }
   .price-label { font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; font-weight: 600; }
@@ -167,7 +243,6 @@
   .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.8rem; transition: color 0.2s; }
   .footer-links a:hover { color: var(--green); }
 
-  /* REVEAL */
   .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
   .reveal.visible { opacity: 1; transform: translateY(0); }
 
@@ -180,7 +255,7 @@
 <!-- ANNOUNCEMENT BAR -->
 <div class="announce-bar">
   <div class="dot"></div>
-  <span>Introducing <strong>Martian</strong> — Our AI Receptionist &nbsp;·&nbsp; Launching April 30 &nbsp;·&nbsp; <a href="ai-receptionist.html">Try It Free →</a></span>
+  <span>Introducing <strong>Martian</strong> — Our AI Receptionist &nbsp;·&nbsp; Launching April 30 &nbsp;·&nbsp; <a href="ai-receptionist.html">Learn More →</a></span>
 </div>
 
 <nav>
@@ -212,6 +287,34 @@
     </div>
   </div>
 </section>
+
+<!-- ============================================================
+     MARTIAN TEASER POSTER — DELETE THIS WHOLE BLOCK AFTER LAUNCH
+     (from this comment down to the matching END comment below)
+     ============================================================ -->
+<div class="martian-poster-section reveal">
+  <div class="martian-poster">
+    <div class="poster-left">
+      <div class="poster-eyebrow">
+        <span class="poster-eyebrow-dot"></span>
+        Coming April 30
+      </div>
+      <span class="poster-name">MARTIAN</span>
+      <div class="poster-divider">
+        <div class="poster-divider-line"></div>
+        <div class="poster-divider-diamond"></div>
+      </div>
+      <div class="poster-tagline">AI Receptionist &nbsp;·&nbsp; By Aimplify</div>
+    </div>
+    <div class="poster-right">
+      <div class="poster-date">Launching <span>April 30, 2025</span><br>at 3:00 PM</div>
+      <a href="ai-receptionist.html" class="poster-btn">Learn More →</a>
+    </div>
+  </div>
+</div>
+<!-- ============================================================
+     END MARTIAN TEASER POSTER
+     ============================================================ -->
 
 <section id="services">
   <div class="section-label">What We Build</div>
