@@ -79,68 +79,63 @@
   .widget-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.6rem; color: var(--white); margin-bottom: 10px; letter-spacing: -0.02em; }
   .widget-desc { font-size: 0.9rem; color: var(--muted); margin-bottom: 40px; line-height: 1.65; }
 
-  /* ── MARTIAN COMING SOON ── */
-  .martian-teaser {
-    position: relative; z-index: 1; margin-bottom: 24px;
+  /* ELEVENLABS EMBED WRAPPER */
+  .martian-widget-wrap {
+    position: relative; z-index: 1;
     background: linear-gradient(135deg, #080f1a 0%, #0a1520 60%, #060c15 100%);
     border: 1px solid rgba(0,232,150,0.18);
-    border-radius: 20px; padding: 56px 32px;
-    overflow: hidden;
-    text-align: center;
+    border-radius: 20px; padding: 52px 32px 44px;
+    overflow: hidden; margin-bottom: 24px;
+    display: flex; flex-direction: column; align-items: center; gap: 0;
   }
-  .martian-teaser::before {
-    content: ''; position: absolute; inset: 0;
+  .martian-widget-wrap::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
     background-image:
       radial-gradient(circle at 50% 50%, rgba(0,232,150,0.07) 0%, transparent 65%),
       repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(0,232,150,0.04) 40px),
       repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(0,232,150,0.04) 40px);
-    pointer-events: none;
+  }
+  .martian-widget-wrap::after {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0,232,150,0.6), transparent);
   }
 
-  /* big name */
+  /* name above the widget */
   .martian-name {
     position: relative; z-index: 1;
     font-family: 'Syne', sans-serif; font-weight: 800;
-    font-size: clamp(3rem, 9vw, 5.5rem);
+    font-size: clamp(2.4rem, 7vw, 4.2rem);
     letter-spacing: -0.045em; line-height: 1;
     color: transparent;
     background: linear-gradient(140deg, #ffffff 0%, #a8f5da 35%, #00E896 68%, #00b870 100%);
     -webkit-background-clip: text; background-clip: text;
-    filter: drop-shadow(0 0 48px rgba(0,232,150,0.38));
-    margin-bottom: 10px;
+    filter: drop-shadow(0 0 40px rgba(0,232,150,0.38));
+    margin-bottom: 8px;
   }
   .martian-tagline {
     position: relative; z-index: 1;
-    font-size: 0.78rem; letter-spacing: 0.26em; text-transform: uppercase;
-    color: var(--muted); font-weight: 500; margin-bottom: 32px;
+    font-size: 0.76rem; letter-spacing: 0.26em; text-transform: uppercase;
+    color: var(--muted); font-weight: 500; margin-bottom: 28px;
   }
 
-  /* decorative divider */
-  .teaser-divider {
+  /* live badge */
+  .live-badge {
     position: relative; z-index: 1;
-    display: flex; align-items: center; justify-content: center; gap: 14px;
-    margin: 6px 0 20px;
+    display: inline-flex; align-items: center; gap: 7px;
+    background: var(--green); color: var(--bg);
+    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.75rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 5px 14px; border-radius: 100px;
+    box-shadow: 0 0 20px rgba(0,232,150,0.45);
+    margin-bottom: 32px;
   }
-  .teaser-divider-line { width: 60px; height: 1px; background: linear-gradient(90deg, transparent, rgba(0,232,150,0.35)); }
-  .teaser-divider-line.r { background: linear-gradient(90deg, rgba(0,232,150,0.35), transparent); }
-  .teaser-divider-diamond {
-    width: 6px; height: 6px; background: var(--green); transform: rotate(45deg);
-    box-shadow: 0 0 8px rgba(0,232,150,0.7);
-  }
+  .live-badge .live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--bg); animation: pulse 1.5s ease-in-out infinite; }
 
-  /* launch pill */
-  .launch-badge {
-    position: relative; z-index: 1;
-    display: inline-flex; align-items: center; gap: 12px;
-    background: rgba(0,232,150,0.07); border: 1px solid rgba(0,232,150,0.28);
-    border-radius: 100px; padding: 11px 24px;
-    font-size: 0.9rem; font-weight: 600; color: var(--white);
+  /* the actual ElevenLabs element — sits inside the dark box */
+  .elevenlabs-wrap {
+    position: relative; z-index: 1; width: 100%;
+    display: flex; justify-content: center;
   }
-  .launch-badge .pill-dot {
-    width: 9px; height: 9px; border-radius: 50%; background: var(--green);
-    box-shadow: 0 0 10px rgba(0,232,150,0.9); animation: pulse 1.8s ease-in-out infinite; flex-shrink: 0;
-  }
-  .launch-badge .date { color: var(--green); font-weight: 700; }
 
   .widget-disclaimer { font-size: 0.78rem; color: var(--muted); position: relative; z-index: 1; }
 
@@ -180,7 +175,7 @@
     nav ul { display: none; }
     .benefits-grid { grid-template-columns: 1fr; }
     .widget-container { padding: 36px 24px; }
-    .martian-teaser { padding: 40px 20px; }
+    .martian-widget-wrap { padding: 36px 20px 32px; }
     footer { flex-direction: column; align-items: flex-start; }
   }
 </style>
@@ -190,7 +185,7 @@
 <!-- ANNOUNCEMENT BAR -->
 <div class="announce-bar">
   <div class="dot"></div>
-  <span>Introducing <strong>Martian</strong> — Our AI Receptionist &nbsp;·&nbsp; Launching April 30 &nbsp;·&nbsp; <a href="ai-receptionist.html">Try It Free →</a></span>
+  <span><strong>Martian is now live</strong> — Our AI Receptionist is ready for your business &nbsp;·&nbsp; <a href="order.html">Get a Quote →</a></span>
 </div>
 
 <nav>
@@ -209,35 +204,30 @@
   <div class="orb orb-1"></div>
   <div class="orb orb-2"></div>
   <div class="hero-inner">
-    <div class="hero-badge">Launching April 30, 2025</div>
+    <div class="hero-badge">Now Live — Try it free</div>
     <h1 class="hero-title">Meet <span>Martian</span></h1>
     <p class="hero-sub">Your AI receptionist that captures clients and answers questions 24/7 — without lifting a finger.</p>
-    <p class="hero-note">Something exciting is almost here.</p>
+    <p class="hero-note">Click the button below and talk to Martian right now.</p>
   </div>
 </div>
 
 <!-- WIDGET -->
 <div class="widget-section">
   <div class="widget-container reveal">
-    <div class="widget-label">Meet Martian</div>
-    <div class="widget-title">Your AI Receptionist</div>
+    <div class="widget-label">Live Demo</div>
+    <div class="widget-title">Talk to Martian</div>
     <div class="widget-desc">Trained on your services, pricing, and FAQs — sounds exactly like your business, available every hour of the day.</div>
 
-    <!-- MARTIAN COMING SOON TEASER -->
-    <div class="martian-teaser">
+    <!-- MARTIAN ELEVENLABS WIDGET -->
+    <div class="martian-widget-wrap">
       <div class="martian-name">MARTIAN</div>
-
-      <div class="teaser-divider">
-        <div class="teaser-divider-line"></div>
-        <div class="teaser-divider-diamond"></div>
-        <div class="teaser-divider-line r"></div>
-      </div>
-
       <div class="martian-tagline">AI Receptionist &nbsp;·&nbsp; By Aimplify</div>
-
-      <div class="launch-badge">
-        <div class="pill-dot"></div>
-        <span>Launching&nbsp;<span class="date">April 30, 2025</span></span>
+      <div class="live-badge">
+        <span class="live-dot"></span>
+        Live Now
+      </div>
+      <div class="elevenlabs-wrap">
+        <elevenlabs-convai agent-id="agent_1201kq8qbbh1ftbbrw31fxs4n0f2"></elevenlabs-convai>
       </div>
     </div>
 
@@ -262,12 +252,14 @@
         <div class="benefit-desc">Your business keeps working when you go home. Martian collects names, numbers, and job details from every customer who reaches out at 2am.</div>
       </div>
       <div class="benefit-card reveal">
-  <div class="benefit-icon">💬</div>
-  <div class="benefit-title">Answers FAQs instantly</div>
-  <div class="benefit-desc">Martian knows your services, pricing, hours, and policies — and gives customers clear, accurate answers on the spot. No hold time, no waiting, no guessing.</div>
+        <div class="benefit-icon">💬</div>
+        <div class="benefit-title">Answers FAQs instantly</div>
+        <div class="benefit-desc">Martian knows your services, pricing, hours, and policies — and gives customers clear, accurate answers on the spot. No hold time, no waiting, no guessing.</div>
+      </div>
+    </div>
+  </div>
 </div>
-</div>
-</div>
+
 <!-- CTA -->
 <div class="cta-section">
   <h2>Want this for your business?</h2>
@@ -286,8 +278,9 @@
   <p>© 2025 Aimplify · Potomac, MD</p>
 </footer>
 
+<script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
+
 <script>
-  // Scroll reveals
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
@@ -297,4 +290,4 @@
   reveals.forEach(el => observer.observe(el));
 </script>
 </body>
-</html>
+</html> 
